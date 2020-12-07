@@ -1,22 +1,23 @@
 package db.lab4.service;
 
 import db.lab4.DAO.GeneralDAOInterface;
+import org.hibernate.Session;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface GeneralServiceInterface<T> {
-    GeneralDAOInterface<T,Integer> getDAO();
+    GeneralDAOInterface<T> getDAO();
 
-    List<T> getAll() throws SQLException;
+    List<T> getAll(Session session) throws SQLException;
 
-    T getById(Integer id) throws SQLException;
+    T getById(Integer id, Session session) throws SQLException;
 
-    int create (T entity) throws SQLException;
+    void create(T entity, Session session) throws SQLException;
 
-    int update (T entity) throws SQLException;
+    void update(T entity, Session session) throws SQLException;
 
-    int delete (Integer id) throws SQLException;
+    void delete(Integer id, Session session) throws SQLException;
 
 
 }

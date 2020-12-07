@@ -5,10 +5,10 @@ import db.lab4.DAO.implementation.SensorDataDAO;
 import db.lab4.model.implementation.SensorData;
 
 public class SensorDataService extends GeneralService<SensorData> {
-    public GeneralDAOInterface<SensorData, Integer> sensorDataDAO = new SensorDataDAO();
+    private final GeneralDAOInterface<SensorData> SENSOR_DATA_DAO = new SensorDataDAO();
 
     @Override
-    public GeneralDAOInterface<SensorData, Integer> getDAO() {
-        return sensorDataDAO;
+    public GeneralDAOInterface<SensorData> getDAO() {
+        return SENSOR_DATA_DAO;
     }
 }

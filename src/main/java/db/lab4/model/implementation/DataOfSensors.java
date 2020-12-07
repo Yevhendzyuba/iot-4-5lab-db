@@ -2,24 +2,33 @@ package db.lab4.model.implementation;
 
 import db.lab4.model.GeneralModelInterface;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+
+@Entity
+@Table(name = "data_of_sensors", schema = "mydb", catalog = "")
 public class DataOfSensors implements GeneralModelInterface {
     private Integer id;
     private String time;
-    private Integer sensorDataId;
-    private Integer pumpsId;
-    private Integer noozleId;
-    private Integer dateId;
+    private SensorData sensorDataBySensorDataId;
+    private Noozle noozleByNoozleId;
 
-    public DataOfSensors(Integer id, String time, Integer sensorDataId, Integer pumpsId, Integer noozleId, Integer dateId) {
-        this.id = id;
-        this.time = time;
-        this.sensorDataId = sensorDataId;
-        this.pumpsId = pumpsId;
-        this.noozleId = noozleId;
-        this.dateId = dateId;
+
+    public DataOfSensors() {
+
     }
 
-    @Override
+    public DataOfSensors(final Integer id, final String time, final SensorData sensorDataBySensorDataId, final Noozle noozleByNoozleId) {
+        this.id = id;
+        this.time = time;
+        this.sensorDataBySensorDataId = sensorDataBySensorDataId;
+        this.noozleByNoozleId = noozleByNoozleId;
+    }
+
+
+    @Id
+    @Column(name = "id")
     public Integer getId() {
         return id;
     }
@@ -28,6 +37,8 @@ public class DataOfSensors implements GeneralModelInterface {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "time")
     public String getTime() {
         return time;
     }
@@ -36,36 +47,39 @@ public class DataOfSensors implements GeneralModelInterface {
         this.time = time;
     }
 
-    public Integer getSensorDataId() {
-        return sensorDataId;
+    @ManyToOne
+    @JoinColumn(name = "noozle_id", referencedColumnName = "id", nullable = false)
+    public Noozle getNoozleByNoozleId() {
+        return noozleByNoozleId;
     }
 
-    public void setSensorDataId(Integer sensorDataId) {
-        this.sensorDataId = sensorDataId;
+    public void setNoozleByNoozleId(Noozle noozleByNoozleId) {
+        this.noozleByNoozleId = noozleByNoozleId;
     }
 
-    public Integer getPumpsId() {
-        return pumpsId;
+    @ManyToOne
+    @JoinColumn(name = "sensor_data_id", referencedColumnName = "id", nullable = false)
+    public SensorData getSensorDataBySensorDataId() {
+        return sensorDataBySensorDataId;
     }
 
-    public void setPumpsId(Integer pumpsId) {
-        this.pumpsId = pumpsId;
+    public void setSensorDataBySensorDataId(SensorData sensorDataBySensorDataId) {
+        this.sensorDataBySensorDataId = sensorDataBySensorDataId;
     }
 
-    public Integer getNoozleId() {
-        return noozleId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DataOfSensors that = (DataOfSensors) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(time, that.time);
+
     }
 
-    public void setNoozleId(Integer noozleId) {
-        this.noozleId = noozleId;
-    }
-
-    public Integer getDateId() {
-        return dateId;
-    }
-
-    public void setDateId(Integer dateId) {
-        this.dateId = dateId;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, time);
     }
 
     @Override
@@ -73,10 +87,9 @@ public class DataOfSensors implements GeneralModelInterface {
         return "DataOfSensord{" +
                 "id=" + id +
                 ", time=" + time +
-                ", sensorDataId=" + sensorDataId +
-                ", pumpsId=" + pumpsId +
-                ", noozleId=" + noozleId +
-                ", dateId=" + dateId +
+                ", noozleId=" + noozleByNoozleId +
+                ", sensorDataId=" + sensorDataBySensorDataId +
                 '}';
     }
+
 }

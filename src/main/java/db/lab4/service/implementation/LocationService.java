@@ -5,11 +5,11 @@ import db.lab4.DAO.implementation.LocationDAO;
 import db.lab4.model.implementation.Location;
 
 public class LocationService extends GeneralService<Location> {
-    public GeneralDAOInterface<Location, Integer> locationDAO = new LocationDAO();
+    private final GeneralDAOInterface<Location> LOCATION_DAO = new LocationDAO();
 
     @Override
-    public GeneralDAOInterface<Location, Integer> getDAO() {
-        return locationDAO;
+    public GeneralDAOInterface<Location> getDAO() {
+        return LOCATION_DAO;
 
     }
 }

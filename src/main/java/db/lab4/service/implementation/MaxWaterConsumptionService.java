@@ -5,10 +5,10 @@ import db.lab4.DAO.implementation.MaxWaterConsumptionDAO;
 import db.lab4.model.implementation.MaxWaterConsumption;
 
 public class MaxWaterConsumptionService extends GeneralService<MaxWaterConsumption> {
-    public GeneralDAOInterface<MaxWaterConsumption, Integer> maxWaterConsumptionDAO = new MaxWaterConsumptionDAO();
+    private final GeneralDAOInterface<MaxWaterConsumption> MAX_WATER_CONSUMPTION_DAO = new MaxWaterConsumptionDAO();
 
     @Override
-    public GeneralDAOInterface<MaxWaterConsumption, Integer> getDAO() {
-        return maxWaterConsumptionDAO;
+    public GeneralDAOInterface<MaxWaterConsumption> getDAO() {
+        return MAX_WATER_CONSUMPTION_DAO;
     }
 }

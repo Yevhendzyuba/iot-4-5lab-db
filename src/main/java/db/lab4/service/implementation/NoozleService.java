@@ -5,10 +5,10 @@ import db.lab4.DAO.implementation.NoozleDAO;
 import db.lab4.model.implementation.Noozle;
 
 public class NoozleService extends GeneralService<Noozle> {
-    public GeneralDAOInterface<Noozle, Integer> noozleDAO = new NoozleDAO();
+    private final GeneralDAOInterface<Noozle> NOOZLE_DAO = new NoozleDAO();
 
     @Override
-    public GeneralDAOInterface<Noozle, Integer> getDAO() {
-        return noozleDAO;
+    public GeneralDAOInterface<Noozle> getDAO() {
+        return NOOZLE_DAO;
     }
 }
